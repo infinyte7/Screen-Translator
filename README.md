@@ -23,6 +23,6 @@ import subprocess
 
 subprocess.call(['python', 'ScreenTranslate.py'], shell=True)
 ```
-
+# [Need to optimize and improve]
 
 ![alt text](https://github.com/infinyte7/Screen-Translator/blob/master/program_flow.png)
