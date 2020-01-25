@@ -25,4 +25,4 @@ subprocess.call(['python', 'ScreenTranslate.py'], shell=True)
 ```
 
 
-![alt text](https://github.com/Manikant712/Screen-Translator/blob/master/program_flow.png)
+![alt text](https://github.com/infinyte7/Screen-Translator/blob/master/program_flow.png)
