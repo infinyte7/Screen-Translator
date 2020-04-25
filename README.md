@@ -25,4 +25,4 @@ subprocess.call(['python', 'ScreenCapture.py'], shell=True)
 ```
 # [Need to optimize and improve]
 
-![alt text](https://github.com/infinyte7/Screen-Translator/blob/master/program_flow.png)
+![alt text](https://github.com/infinyte7/Screen-Translator/blob/master/screenshot.png)
