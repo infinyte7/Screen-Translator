@@ -23,6 +23,10 @@ import subprocess
 
 subprocess.call(['python', 'ScreenCapture.py'], shell=True)
 ```
-# [Need to optimize and improve]
+### Save the file with .pyw extension to hide console
+```
+main.py  -->   main.pyw
+ScreenCapture.py  -->  ScreenCapture.py
+```
 
 ![alt text](https://github.com/infinyte7/Screen-Translator/blob/master/screenshot.png)
