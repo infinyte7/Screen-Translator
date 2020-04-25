@@ -3,7 +3,7 @@ Using snip to take screenshot after that Take OCR of the Image, then translate t
 
 ## Quick Start
 1. Install Python 
-https://www.python.org/downloads/
+<br>https://www.python.org/downloads/
 
 2. Install following python library using pip
 ```
@@ -11,7 +11,7 @@ pip install googletrans PyQt5 Pillow pytesseract
 ```
 
 <br>3. Install Tesseract-OCR 
-https://tesseract-ocr.github.io/tessdoc/Downloads
+<br>https://tesseract-ocr.github.io/tessdoc/Downloads
 
 <br>4. Ready to go
 
@@ -70,6 +70,13 @@ def ok():
             print(tr.text)
             self.textTrans = tr.text            
 ```
+
+Language code for tesseract
+<br>https://github.com/tesseract-ocr/tesseract/blob/master/doc/tesseract.1.asc#languages
+
+<br>Language code for googletrans
+<br>https://py-googletrans.readthedocs.io/en/latest/#googletrans-languages
+
 <b>5. Ready to go</b>
 
 ### Save the file with .pyw extension to hide console
