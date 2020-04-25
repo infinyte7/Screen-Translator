@@ -7,6 +7,7 @@ pytesseract
 tkinter
 PIL
 PyQt5
+googletrans
 ```
 
 ## Install Tesseract-OCR then import pytesseract 
@@ -29,4 +30,14 @@ main.py  -->   main.pyw
 ScreenCapture.py  -->  ScreenCapture.py
 ```
 
+## Demo
 ![alt text](https://raw.githubusercontent.com/infinyte7/Screen-Translator/master/ScreenTranslate_demo.gif)
+
+## License
+<b>[Snipping-Tool](https://github.com/Rounak40/Snipping-Tool)</b>
+<br>Rounak40
+<br>MIT License 
+
+<b>Screen Translate</b>
+<br>Mani
+<br>MIT License
