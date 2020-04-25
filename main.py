@@ -10,7 +10,8 @@ class ScreenTranslate:
         self.master = master
         master.title("Screen Translate")
         
-        self.lang = "chi_sim"
+        self.lang_src = "chi_sim"
+        self.lang_dest = "eng"
         self.text = ""
 
         self.textTrans = ""
@@ -27,7 +28,7 @@ class ScreenTranslate:
 
     def capture(self):
         print("Capture")
-        #print(self.lang)
+        #print(self.lang_src)
 
         #open pyhton file for screenshot
         subprocess.call(['python', 'ScreenCapture.py'], shell=True)
@@ -43,7 +44,7 @@ class ScreenTranslate:
         #create window 
         wh = str(width+80) + 'x' + str(height+80)
         imgApp.geometry(wh)
-        imgApp.title("Translation")
+        imgApp.title("Image")
         imgApp.attributes('-topmost',True)
 
         menubar = Menu(imgApp)
@@ -71,37 +72,78 @@ class ScreenTranslate:
     def changeLang(self):
         print("Change lang")
 
-        OPTIONS = [
+        SRC = [
         "Chinese",
-        "English"
+        "English",
+        "Hindi"
+        ] #etc
+
+        DEST = [
+        "Chinese",
+        "English",
+        "Hindi"
         ] #etc
 
         master = Toplevel()
-        variable = StringVar(master)
-        variable.set(OPTIONS[0]) # default value
         master.attributes('-topmost',True)
-        w = OptionMenu(master, variable, *OPTIONS)
-        w.pack()
+        
+        lbl_lang_src = Label(master, text="Source Language")
+        lbl_lang_src.grid(column=0, row=0, padx=10)
+        
+        src_var = StringVar(master)
+        src_var.set(SRC[0]) # default value
+        
+        w1 = OptionMenu(master, src_var, *SRC)
+        w1.grid(column=1,row=0,padx=10)
+
+        dest_var = StringVar(master)
+        dest_var.set(DEST[1]) # default value
+
+        lbl_lang_dest = Label(master, text="Target Language")
+        lbl_lang_dest.grid(column=0, row=1, padx=10)
+
+        w2 = OptionMenu(master, dest_var, *DEST)
+        w2.grid(column=1,row=1,padx=10)
 
         def ok():
-            print ("value is:" + variable.get())
+            print ("Source Lang.:" + src_var.get())
+            print ("Target Lang.:" + dest_var.get())            
 
             #self.lang="chi_sim"
-            #print(self.lang)
+            #print(self.lang_src)
 
-            if "English" in variable.get():
-                self.lang = "eng"
-                print(self.lang)
+            # Source Language Options
+            if "English" in src_var.get():
+                self.lang_src = "eng"
+                print(self.lang_src)
 
-            if "Chinese" in variable.get():
-                self.lang = "chi_sim"
-                print(self.lang)
+            if "Chinese" in src_var.get():
+                self.lang_src = "chi_sim"
+                print(self.lang_src)
+
+            if "Hindi" in src_var.get():
+                self.lang_src = "hin"
+                print(self.lang_src)
+
+            
+            # Target Language Option
+            if "English" in dest_var.get():
+                self.lang_dest = "eng"
+                print(self.lang_dest)
+
+            if "Chinese" in dest_var.get():
+                self.lang_dest = "chi_sim"
+                print(self.lang_dest)
+
+            if "Hindi" in dest_var.get():
+                self.lang_dest = "hin"
+                print(self.lang_dest)
                 
             master.destroy()
             
 
         button = Button(master, text="OK", command=ok)
-        button.pack()
+        button.grid(column=0,row=2)
 
         master.mainloop()
 
@@ -109,7 +151,7 @@ class ScreenTranslate:
         #tesseract library for image to OCR
         
         pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
-        self.text = pytesseract.image_to_string(Image.open('Capture.jpg'), lang=self.lang)
+        self.text = pytesseract.image_to_string(Image.open('Capture.jpg'), lang=self.lang_src)
 
         #print OCR text to console
         print(self.text)
@@ -117,12 +159,12 @@ class ScreenTranslate:
         #create a window for showing text from image  OCR
         OCRbox = Tk()
         OCRbox.geometry("515x620")
-        OCRbox.title("Text")
+        OCRbox.title("Translation")
         OCRbox.attributes('-topmost',True)
 
         #text box
 
-        lbl = Label(OCRbox, text="Output")
+        lbl = Label(OCRbox, text="OCR Text")
         lbl.grid(column=0, row=0, padx=10)
 
 
@@ -130,32 +172,52 @@ class ScreenTranslate:
         T.grid(column=0, row=1, padx=10, pady=10)
         T.tag_configure('tag-center', justify='center')
 
-        if "chi_sim" in self.lang:
-            opText = re.sub(r'(?<=[^\W\d_])\s+(?=[^\W\d_])', '', self.text)
-            T.insert(END, opText)
-        else:
-            T.insert(END, self.text)
+        
+        T.insert(END, self.text)
     
+
+        lbl_translate = Label(OCRbox, text="Translated")
+        lbl_translate.grid(column=0, row=2, padx=10)
 
         translator = Translator()
 
-        if self.lang == 'chi_sim':
+        # Chinese to English, Hindi
+        if self.lang_dest == 'chi_sim' and self.lang_src == "eng":
+            tr = translator.translate(self.text, dest='zh-cn',src='en')
+            print(tr.text)
+            self.textTrans = tr.text
+            
+        if self.lang_dest == 'chi_sim' and self.lang_src == "hin":
+            tr = translator.translate(self.text, dest='zh-cn',src='hi')
+            print(tr.text)
+            self.textTrans = tr.text
+
+        
+        if self.lang_dest == 'eng'and self.lang_src == "chi_sim":
             tr = translator.translate(self.text, dest='en',src='zh-cn')
             print(tr.text)
             self.textTrans = tr.text
 
-            TransOut = Text(OCRbox, wrap=WORD, width=70, height= 20)
-            TransOut.grid(column=0, row=3, padx=10, pady=10)
-            TransOut.insert(END, self.textTrans)
-
-        if self.lang == 'eng':
-            tr = translator.translate(self.text, dest='zh-cn',src='en')
+        if self.lang_dest == 'eng'and self.lang_src == "hin":
+            tr = translator.translate(self.text, dest='en',src='hi')
             print(tr.text)
             self.textTrans = tr.text
 
-            TransOut = Text(OCRbox, wrap=WORD, width=70, height= 20)
-            TransOut.grid(column=0, row=3, padx=10, pady=10)
-            TransOut.insert(END, self.textTrans)
+        
+        if self.lang_dest == 'hin' and self.lang_src == "eng":
+            tr = translator.translate(self.text, dest='hi',src='en')
+            print(tr.text)
+            self.textTrans = tr.text
+
+        if self.lang_dest == 'hin' and self.lang_src == "chi_sim":
+            tr = translator.translate(self.text, dest='hi',src='zh-cn')
+            print(tr.text)
+            self.textTrans = tr.text
+
+               
+        TransOut = Text(OCRbox, wrap=WORD, width=70, height= 20)
+        TransOut.grid(column=0, row=3, padx=10, pady=10)
+        TransOut.insert(END, self.textTrans)
         
         OCRbox.mainloop()
 
