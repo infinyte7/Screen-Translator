@@ -73,7 +73,6 @@ def ok():
 
 Language code for tesseract
 <br>https://github.com/tesseract-ocr/tesseract/blob/master/doc/tesseract.1.asc#languages
-
 <br>Language code for googletrans
 <br>https://py-googletrans.readthedocs.io/en/latest/#googletrans-languages
 
