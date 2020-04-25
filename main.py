@@ -181,7 +181,7 @@ class ScreenTranslate:
 
         translator = Translator()
 
-        # Chinese to English, Hindi
+        
         if self.lang_dest == 'chi_sim' and self.lang_src == "eng":
             tr = translator.translate(self.text, dest='zh-cn',src='en')
             print(tr.text)
