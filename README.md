@@ -29,4 +29,4 @@ main.py  -->   main.pyw
 ScreenCapture.py  -->  ScreenCapture.py
 ```
 
-![alt text](https://github.com/infinyte7/Screen-Translator/blob/master/screenshot.png)
+![alt text](https://raw.githubusercontent.com/infinyte7/Screen-Translator/master/ScreenTranslate_demo.gif)
