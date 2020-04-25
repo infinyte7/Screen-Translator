@@ -2,32 +2,35 @@ from tkinter import *
 from PIL import ImageTk, Image
 import subprocess
 import pytesseract
-
+from googletrans import Translator
+import time
 class ScreenTranslate:
 
     def __init__(self, master):
         self.master = master
         master.title("Screen Translate")
         
-        self.lang = "eng"
+        self.lang = "chi_sim"
         self.text = ""
 
         self.textTrans = ""
 
         self.capture = Button(master, text="Capture", command=self.capture)
-        #self.lang_button = Button(master, text="Change Language", command=self.changeLang)
+        self.lang_button = Button(master, text="Language", command=self.changeLang)
+        #self.btn = Button(master, text="Change Language", command=self.changeLang)
 
         # LAYOUT
 
-        self.capture.grid(row=0, column=0)
-        #self.lang_button.grid(row=0, column=1)
+        self.capture.grid(row=0, column=0,padx=(50, 10), pady=10)
+        self.lang_button.grid(row=0, column=1,padx=(10, 50))
+        #self.btn.grid(row=0, column=2)
 
     def capture(self):
         print("Capture")
         #print(self.lang)
 
         #open pyhton file for screenshot
-        subprocess.call(['python', 'ScreenTranslate.py'], shell=True)
+        subprocess.call(['python', 'ScreenCapture.py'], shell=True)
 
 
         #create a new window to show image with translation
@@ -44,7 +47,7 @@ class ScreenTranslate:
         imgApp.attributes('-topmost',True)
 
         menubar = Menu(imgApp)
-        menubar.add_command(label="Image to Text",command=self.Translate)
+        menubar.add_command(label="Translate",command=self.Translate)
         menubar.add_command(label="Language",command=self.changeLang)
 
         imgApp.config(menu=menubar)
@@ -69,8 +72,8 @@ class ScreenTranslate:
         print("Change lang")
 
         OPTIONS = [
-        "English",
         "Chinese",
+        "English"
         ] #etc
 
         master = Toplevel()
@@ -134,24 +137,27 @@ class ScreenTranslate:
             T.insert(END, self.text)
     
 
-        btn = Button(OCRbox, text="Translate", command=self.trans)
-        btn.grid(column=0, row=2)
+        translator = Translator()
 
-        TransOut = Text(OCRbox, wrap=WORD, width=70, height= 20)
-        TransOut.grid(column=0, row=3, padx=10, pady=10)
+        if self.lang == 'chi_sim':
+            tr = translator.translate(self.text, dest='en',src='zh-cn')
+            print(tr.text)
+            self.textTrans = tr.text
 
-        TransOut.insert(END, self.textTrans)
+            TransOut = Text(OCRbox, wrap=WORD, width=70, height= 20)
+            TransOut.grid(column=0, row=3, padx=10, pady=10)
+            TransOut.insert(END, self.textTrans)
 
+        if self.lang == 'eng':
+            tr = translator.translate(self.text, dest='zh-cn',src='en')
+            print(tr.text)
+            self.textTrans = tr.text
+
+            TransOut = Text(OCRbox, wrap=WORD, width=70, height= 20)
+            TransOut.grid(column=0, row=3, padx=10, pady=10)
+            TransOut.insert(END, self.textTrans)
         
         OCRbox.mainloop()
-
-    def trans(self):
-        print("trans")
-
-        
-
-        
-       
 
 root = Tk()
 my_gui = ScreenTranslate(root)
