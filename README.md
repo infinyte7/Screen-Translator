@@ -10,10 +10,9 @@ Using snip to take screenshot after that Take OCR of the Image, then translate t
 pip install googletrans PyQt5 Pillow pytesseract
 ```
 
-<br>3. Install Tesseract-OCR 
+3. Install Tesseract-OCR 
 <br>https://tesseract-ocr.github.io/tessdoc/Downloads
-
-<br>4. Ready to go
+4. Ready to go
 
 ## Demo
 ![alt text](https://raw.githubusercontent.com/infinyte7/Screen-Translator/master/ScreenTranslate_demo.gif)
