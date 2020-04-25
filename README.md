@@ -17,11 +17,11 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 self.text = pytesseract.image_to_string(Image.open('Capture.jpg'), lang=self.lang)
 ```
 
-# Using ScreenTranslate.py
+# Using ScreenCapture.py
 ```python
 import subprocess 
 
-subprocess.call(['python', 'ScreenTranslate.py'], shell=True)
+subprocess.call(['python', 'ScreenCapture.py'], shell=True)
 ```
 # [Need to optimize and improve]
 
