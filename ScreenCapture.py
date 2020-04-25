@@ -14,10 +14,8 @@ class Snippy(QtWidgets.QWidget):
         self.setWindowTitle('ScreenShot')
         self.begin = QtCore.QPoint()
         self.end = QtCore.QPoint()
-        self.setWindowOpacity(0.5)
-        QtWidgets.QApplication.setOverrideCursor(
-            QtGui.QCursor(QtCore.Qt.CrossCursor)
-        )
+        self.setWindowOpacity(0.15)
+        QtWidgets.QApplication.setOverrideCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.show()
 
@@ -46,13 +44,19 @@ class Snippy(QtWidgets.QWidget):
         image.save("Capture.jpg")
         print("Screen is captured!")
 
+def showWindow():
+    app = Tk()
+    app.geometry("500x500")
+    app.attributes("-topmost", True)
+    app.title("Translate Screen")
+    app.mainloop()
+
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Snippy()
     window.show()
     app.aboutToQuit.connect(app.deleteLater)
-    sys.exit(app.exec_())    
+    sys.exit(app.exec_())
 
-
-
+    showWindow()
