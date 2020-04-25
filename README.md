@@ -29,7 +29,7 @@ self.text = pytesseract.image_to_string(Image.open('Capture.jpg'), lang=self.lan
 ## Adding other languages
 <b>1.Install language data for Tesseract-OCR</b>
 <b>2. Add option in</b>
-```
+```python
 .....
 def changeLang(self):
         print("Change lang")
@@ -43,7 +43,7 @@ def changeLang(self):
         .....
 ```
 <b>3. Add following in ok()</b>
-```
+```python
 ...
 ...
 def ok():
@@ -59,7 +59,7 @@ def ok():
 ```
 
 <b>4. Add following to Translate(self)</b>
-```
+```python
         if self.lang_dest == 'eng'and self.lang_src == "hin":
             tr = translator.translate(self.text, dest='en',src='hi')
             print(tr.text)
