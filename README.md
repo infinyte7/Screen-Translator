@@ -1,7 +1,7 @@
 # Screen-Translator
 Using snip to take screenshot after that Take OCR of the Image, then translate text.
 
-# Library used in this project
+## Library used in this project
 ```
 pytesseract
 tkinter
@@ -9,7 +9,7 @@ PIL
 PyQt5
 ```
 
-# Using Tesseract-OCR
+## Install Tesseract-OCR then import pytesseract 
 ```python
 import pytesseract
 
@@ -17,7 +17,7 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 self.text = pytesseract.image_to_string(Image.open('Capture.jpg'), lang=self.lang)
 ```
 
-# Using ScreenCapture.py
+## Using ScreenCapture.py in main.py to select screenshot area on screen
 ```python
 import subprocess 
 
